@@ -16,9 +16,9 @@ max_frequency = 1e15
 
 # Generate RGB color smoothly across the visible spectrum
 def frequency_to_smooth_color(frequency):
-    normalized_freq = (frequency - min_frequency) / (max_frequency - min_frequency)
+    normalized_freq = 1 - (frequency - min_frequency) / (max_frequency - min_frequency)
     # Map normalized frequency to a wavelength range (400-700 nm for visible light)
-    wavelength = 400 + normalized_freq * 300  # Map to 400-700 nm
+    wavelength = 400 + normalized_freq * 300  # 400-700 nm spectrum range
 
     # Convert wavelength to RGB (simple approximation)
     if 380 <= wavelength < 440:
@@ -53,32 +53,21 @@ def create_smooth_rainbow_image(width=600, height=50):
 # Title and description
 st.title("Interactive Photoelectric Effect Simulation")
 st.markdown("""
-The Discovery: \n
-When scientists shined light on certain metals, they noticed that electrons were ejected from the metal surface.
-But surprisingly, brighter light (more intensity) didn’t always eject more electrons. Instead, it depended on the frequency (or color) of the light.
-Red light (low frequency) didn’t eject electrons, no matter how bright it was. But blue or ultraviolet light (high frequency) could eject electrons even at low intensity.
-
-Albert Einstein's Explanation (1905): \n
-Einstein proposed that light behaves like tiny packets of energy called photons.
-When a photon hits an electron in the metal, it transfers its energy to the electron. If the photon has enough energy, the electron is ejected.
-Higher-frequency photons (like blue or UV) carry more energy, which explained why only certain frequencies could release electrons.
-This experiment proved that light behaves like a particle in some cases, not just a wave, leading to the development of quantum mechanics.\n
-
+The **Photoelectric Effect** was discovered when scientists observed that shining light on certain metals could eject electrons. 
+However, the brightness of the light wasn't the deciding factor—only light with high enough frequency (like blue or ultraviolet) could eject electrons. 
+This led to the understanding that light behaves like discrete packets of energy, or photons, which was a pivotal step in the development of quantum mechanics.
 """)
-            
-   # Load and display a local image
-# Image from a URL
+
+# Display an image of the effect (replace with desired URL)
 image_url = "https://vanessawithun.com/wp-content/uploads/2024/10/example.jpg"
-# Display the image with a caption
 st.image(image_url, caption="Photoelectric Effect", use_column_width=True)
 
-st.markdown("""            
-Instructions:      
-- **Adjust the frequency** by using the slider or selecting on the **rainbow spectrum**.
-- **See the smooth color transitions** and observe how stopping voltage changes based on frequency.
-- The **voltage** is displayed alongside the frequency on the graph.
+st.markdown("""
+### Instructions:
+- **Adjust the frequency** by moving the slider or clicking on the **rainbow spectrum**.
+- **See the color change smoothly** across the visible spectrum.
+- Observe how **stopping voltage** varies with frequency and is displayed next to the red dot on the graph.
 """)
-
 
 # Display the smooth rainbow spectrum
 rainbow_img = create_smooth_rainbow_image()
@@ -135,8 +124,8 @@ st.pyplot(fig)
 # Footer with explanation
 st.markdown("""
 #### How This Simulation Works:
-1. **Adjust the frequency** using the slider or by selecting on the rainbow spectrum.
-2. Higher frequency light (e.g., **blue/violet**) ejects electrons with higher energy, increasing the stopping voltage.
-3. If the frequency is **too low** (e.g., **red/infrared**), no electrons are ejected, and the voltage remains **0 V**.
-4. Observe how the **color smoothly transitions** across the visible spectrum.
+1. **Move the slider** to adjust the frequency of light.
+2. Observe how **higher frequencies** (e.g., blue or violet) lead to higher stopping voltages.
+3. If the frequency is **too low** (e.g., red light), no electrons are ejected, and the voltage remains **0 V**.
+4. Notice the **smooth color transitions** representing the visible spectrum.
 """)
